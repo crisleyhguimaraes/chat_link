@@ -1,0 +1,75 @@
+.charWindow{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.chatWindow--header{
+    height: 60px;
+    border-bottom: 1px solid rgb(94, 46, 170);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chatWindow--headerinfo{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.chatWindow--avatar{
+    width: 40px;
+    height: 40px;
+    border-radius: 20%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.chatWindow--name{
+    font-size: 22px;
+    color: black;
+}
+
+.chatWindow--headerbuttons{
+    display: flex;
+    align-items: center;
+    margin-right: 14px;
+}
+
+.chatWindow--btn{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.chatWindow--body{
+    flex: 1;
+    overflow-y: auto;
+    background-color: #3d3c61e5;
+    background-size: cover;
+    background-position: center;
+    background-color: transparent;
+}
+
+.chatwindow--footer{
+    height: 62px;
+    display: flex;
+    align-items: center;
+}
+
+.chatWindow--pre{
+    display: flex;
+}
+
+.chatWindow--inputarea{
+    flex: 1;
+}
+
+.charWindow--position {
+    display: flex;
+}
