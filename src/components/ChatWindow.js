@@ -39,8 +39,6 @@ export default () => {
 
             </div>
             <div className="chatWindow--footer">
-
-
                 <div className="chatWindow--pre">
                         <div className="chatWindow--btn">
                             <EmojiEmotionsIcon style={{color: '#6272a4'}} />
@@ -48,9 +46,12 @@ export default () => {
 
 
                 <div className="chatWindow--inputarea">
-                    <input className="chatWindow--input" type="text" />
+                    <input 
+                        className="chatWindow--input" 
+                        type="text"
+                        placeholder="Digite sua mensagem"                        
+                    />
                 </div>
-
 
                 <div className="chatWindow--pos">
                         <div className="chatWindow--btn">
