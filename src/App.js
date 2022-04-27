@@ -4,12 +4,13 @@ import './App.css';
 import ChatListItem from './components/ChatListItem';
 import ChatIntro from './components/ChatIntro';
 import ChatWindow from './components/ChatWindow';
-
+import NewChat from './components/NewChat';
 
 import DonutLargeIcon from '@material-ui/icons/DonutLarge';
 import CommentIcon from '@material-ui/icons/Comment';
 import ListIcon from '@material-ui/icons/List';
 import SearchIcon from '@material-ui/icons/Search';
+
 
 export default () => {
 
@@ -22,12 +23,22 @@ export default () => {
 
   ])
   const [activeChat, setActiveChat] = useState({});
+  const [user, setUser] = useState({
+    id: 1234,
+    avatar: 'https://styles.redditmedia.com/t5_u8wq5/styles/communityIcon_62iioh7khuv51.png',
+    name: 'Mandaloriano'
+  });
 
   return (
     <div className="app-window">
       <div className="sidebar">
+
+        <NewChat />
+
+
+
           <header> 
-            <img className="header--avatar" src="https://styles.redditmedia.com/t5_u8wq5/styles/communityIcon_62iioh7khuv51.png" alt="imagem perfil mandaloriano" />
+            <img className="header--avatar" src={user.avatar} alt="imagem perfil mandaloriano" />
             <div className="header--buttons">
               <div className="header--btn">
                 <DonutLargeIcon style={{color: '#6272a4'}} />
@@ -63,7 +74,9 @@ export default () => {
       </div>
       <div className="contentarea">
         {activeChat.chatId !== undefined &&
-          <ChatWindow />
+          <ChatWindow 
+          user={user}
+          />
         }
         {activeChat.chatId === undefined && 
               <ChatIntro />
