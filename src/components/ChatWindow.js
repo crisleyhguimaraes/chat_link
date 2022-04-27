@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import EmojiPicker from 'emoji-picker-react';
 import './ChatWindow.css';
 
@@ -14,8 +14,19 @@ import SettingsVoiceIcon from '@material-ui/icons/SettingsVoice';
 
 export default () => {
 
-    const handleEmojiClick = () => {
+    const [emojiOpen, setEmojiOpen] = useState (false);
+    const [text, setText] = useState ('');
+
+    const handleEmojiClick = (e, emojiObject) => {
+        setText(text + emojiObject.emoji);
         
+    }
+
+    const handleOpenEmoji = () => {
+        setEmojiOpen(true)
+    }
+    const handleCloseEmoji = () => {
+        setEmojiOpen(false)
     }
 
     return (
@@ -44,7 +55,8 @@ export default () => {
             <div className="chatWindow--body">
             </div>
 
-            <div className="chatWindow--emojiarea">
+            <div className="chatWindow--emojiarea" 
+                style={{height: emojiOpen ? '200px' : '0px'}}  >
                 <EmojiPicker
                     onEmojiClick={handleEmojiClick}
                     disableSearchBar
@@ -55,12 +67,18 @@ export default () => {
             <div className="chatWindow--footer">
                 <div className="chatWindow--pre">
 
-                <       div className="chatWindow--btn">
+                <   div className="chatWindow--btn"
+                    onClick={handleCloseEmoji}
+                    style={{width: emojiOpen?40:0}}
+                >
                             <CloseIcon style={{color: '#6272a4'}} />
                         </div>
 
-                       <div className="chatWindow--btn">
-                            <EmojiEmotionsIcon style={{color: '#6272a4'}} />
+                       <div className="chatWindow--btn"
+                            onClick={handleOpenEmoji}
+                       >
+
+                            <EmojiEmotionsIcon style={{color: emojiOpen?'#3d3c6149':'#6272a4'}} />
                         </div>
 
 
@@ -69,6 +87,8 @@ export default () => {
                         className="chatWindow--input" 
                         type="text"
                         placeholder="Digite sua mensagem"                        
+                        value={text}
+                        onChange={e=>setText(e.target.value)}
                     />
                 </div>
 
