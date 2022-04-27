@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import EmojiPicker from 'emoji-picker-react';
 import './ChatWindow.css';
 
+import MessageItem from './MessageItem';
+
 import SearchIcon from '@material-ui/icons/Search'
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -14,8 +16,18 @@ import SettingsVoiceIcon from '@material-ui/icons/SettingsVoice';
 
 export default () => {
 
+    //transcrever audio 
+    let recognition = null;
+    let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognition !== undefined){
+        recognition = new SpeechRecognition;
+    }
+
+    //fim
     const [emojiOpen, setEmojiOpen] = useState (false);
     const [text, setText] = useState ('');
+    const [listenig, setListenig] = useState (false);
+    const [list, setList] = useState ([{},{},{},{},{},{}])
 
     const handleEmojiClick = (e, emojiObject) => {
         setText(text + emojiObject.emoji);
@@ -29,9 +41,33 @@ export default () => {
         setEmojiOpen(false)
     }
 
+    const handleMicClick = () => {
+        if(recognition !== null){
+//transcrição do audio
+            recognition.onstart = () => {
+                setListenig (true);
+            }
+            recognition.onend = () => {
+                setListenig (false);
+            }
+            recognition.onresult = (e) => {
+                setText(e.results[0][0].transcript)
+            }
+//mic ouvir audio- qndo iniciar executa o Listening como true, quando acabar como false
+//
+            recognition.start ();
+                
+        }
+    }
+    const handleSendClick = () => {
+
+    }
+
+
     return (
         <div className="chatWindow">
             <div className="chatWindow--header">
+                
                 <div className="chatWindow--headerinfo">
                     <img className="chatWindow--avatar" src="https://image.pngaaa.com/845/4786845-middle.png" alt="" />
                     <div className="chatWindow--name"> Personagem </div>
@@ -53,6 +89,14 @@ export default () => {
 
             </div>
             <div className="chatWindow--body">
+                {list.map((item, key) =>(
+                    <MessageItem
+                        key={key}
+                        data={item}
+                    />
+                ))}
+
+
             </div>
 
             <div className="chatWindow--emojiarea" 
@@ -78,7 +122,7 @@ export default () => {
                             onClick={handleOpenEmoji}
                        >
 
-                            <EmojiEmotionsIcon style={{color: emojiOpen?'#3d3c6149':'#6272a4'}} />
+                            <EmojiEmotionsIcon style={{color: emojiOpen?'#8be9fd':'#6272a4'}} />
                         </div>
 
 
@@ -93,10 +137,16 @@ export default () => {
                 </div>
 
                 <div className="chatWindow--pos">
-                        <div className="chatWindow--btn">
-                            <SendIcon  style={{color: '#6272a4'}} />
-                        </div>
-
+                    {text === ''&&
+                    <div onClick={handleMicClick} className="chatWindow--btn">
+                        <SettingsVoiceIcon  style={{color: listenig?'#8be9fd' : '#6272a4'}} />
+                    </div>
+                    }
+                    {text !== '' &&
+                    <div onClick={handleSendClick} className="chatWindow--btn">
+                        <SendIcon  style={{color: '#6272a4'}} />
+                    </div>
+                    }
                         
                     </div>
                 </div>
