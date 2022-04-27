@@ -1,4 +1,5 @@
 import React from 'react';
+import EmojiPicker from 'emoji-picker-react';
 import './ChatWindow.css';
 
 import SearchIcon from '@material-ui/icons/Search'
@@ -12,6 +13,11 @@ import SettingsVoiceIcon from '@material-ui/icons/SettingsVoice';
 
 
 export default () => {
+
+    const handleEmojiClick = () => {
+        
+    }
+
     return (
         <div className="chatWindow">
             <div className="chatWindow--header">
@@ -36,11 +42,24 @@ export default () => {
 
             </div>
             <div className="chatWindow--body">
-
             </div>
+
+            <div className="chatWindow--emojiarea">
+                <EmojiPicker
+                    onEmojiClick={handleEmojiClick}
+                    disableSearchBar
+                    disableSkinTonePicker
+                />
+            </div>
+
             <div className="chatWindow--footer">
                 <div className="chatWindow--pre">
-                        <div className="chatWindow--btn">
+
+                <       div className="chatWindow--btn">
+                            <CloseIcon style={{color: '#6272a4'}} />
+                        </div>
+
+                       <div className="chatWindow--btn">
                             <EmojiEmotionsIcon style={{color: '#6272a4'}} />
                         </div>
 
