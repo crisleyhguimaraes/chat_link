@@ -3,7 +3,7 @@ import './NewChat.css';
 
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
-export default () => {
+export default ({user, chatlist, show, setShow}) => {
 
     const [list, setList] = useState([
         {id: 123, avatar: 'https://comic-cons.xyz/wp-content/uploads/Star-Wars-avatars-Movie-Stormtrooper.jpg', name: 'Stormtrooper'},
@@ -12,11 +12,14 @@ export default () => {
         {id: 123, avatar: 'https://hqrock.files.wordpress.com/2019/08/obi-wan-lightsaber.jpg', name: 'Obi-Wan'}
     ]);
 
+    const handleClose = () => {
+        setShow(false);
+    }
 
     return (
-        <div className="newChat" >
+        <div className="newChat" style={{left: show? 0: -400}} >
             <div className="newChat--head">
-                <div className="newChat--backbutton">
+                <div onClick={handleClose} className="newChat--backbutton">
                     <ArrowBackIcon style={{color: '#bd93f9'}} />
                 </div>
                 <div className="newChat--headtitle">Novo chat</div>
@@ -24,12 +27,8 @@ export default () => {
             <div className="newChat--list">
                 {list.map((item, key) => (
                     <div className="newChat--item" key={key}>
-                        <img className="newChat--itemavatar" src="" alt="" />
-                        <div className="newChat--itemname">
-
-                        
-
-                        </div>
+                        <img className="newChat--itemavatar" src={item.avatar} />
+                        <div className="newChat--itemname"> {item.name} </div>
                     </div>
                 ))}
 

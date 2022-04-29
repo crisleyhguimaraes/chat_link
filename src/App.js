@@ -5,6 +5,7 @@ import ChatListItem from './components/ChatListItem';
 import ChatIntro from './components/ChatIntro';
 import ChatWindow from './components/ChatWindow';
 import NewChat from './components/NewChat';
+import Login from './components/Login';
 
 import DonutLargeIcon from '@material-ui/icons/DonutLarge';
 import CommentIcon from '@material-ui/icons/Comment';
@@ -23,17 +24,38 @@ export default () => {
 
   ])
   const [activeChat, setActiveChat] = useState({});
-  const [user, setUser] = useState({
-    id: 1234,
-    avatar: 'https://styles.redditmedia.com/t5_u8wq5/styles/communityIcon_62iioh7khuv51.png',
-    name: 'Mandaloriano'
-  });
+  const [user, setUser] = useState(null);
+  const [showNewChat, setShowNewChat] = useState(false);
+
+  const handleNewChat = () => {
+    setShowNewChat(true);
+  }
+
+  const handleLoginData = async (u) => {
+    let newUser = {
+      id: u.uid, 
+      name: u.displayName,
+      avatar: u.photoURL
+    };
+    //
+    setUser(newUser);
+  }
+
+  if(user === null) {
+    return (<Login onReceive={handleLoginData} />);
+  }
 
   return (
     <div className="app-window">
       <div className="sidebar">
 
-        <NewChat />
+        <NewChat 
+          chatlist={chatlist}
+          user={user}
+          show={showNewChat}
+          setShow={setShowNewChat}
+
+        />
 
 
 
@@ -43,7 +65,7 @@ export default () => {
               <div className="header--btn">
                 <DonutLargeIcon style={{color: '#6272a4'}} />
               </div>
-              <div className="header--btn">
+              <div onClick={handleNewChat} className="header--btn">
                 <CommentIcon style={{color: '#6272a4'}} />
               </div>
               <div className="header--btn">

@@ -3,7 +3,8 @@
 }
 
 body {
-  background-color: #bd93f9;
+  background-image: url(./img/background-chat.png);
+  background-size: cover;
   margin: 0;
   font-family:'Helvetica Neue', Arial, Helvetica, sans-ser;
 }
@@ -71,6 +72,7 @@ header {
   outline: 0;
   background-color: transparent;
   margin-left: 10px;
+  margin-top: 15px;
 }
 
 .chatlist{
@@ -80,8 +82,8 @@ header {
 }
 
 .chatlist::-webkit-scrollbar{
-  width: 6px;
-  height: 6px;
+  width: 10px;
+  height: 10px;
 }
 
 .chatlist::-webkit-scrollbar-thumb{
